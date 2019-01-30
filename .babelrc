@@ -1,3 +1,13 @@
 {
-  "presets": ["latest", "stage-2"]
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    [
+      "inline-dotenv",
+      {
+        "path": ".env"
+      }
+    ]
+  ]
 }
