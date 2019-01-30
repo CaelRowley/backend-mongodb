@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle, no-param-reassign */
+
 export default {
   Query: {
     allICOs: async (parent, args, { models }) => {
@@ -11,10 +13,6 @@ export default {
 
   Mutation: {
     createICO: async (parent, args, { models }) => {
-      // const ico = await models.ICO.create({
-      //   ...args
-      // });
-      // return ico
       const ico = await new models.ICO(args).save();
       ico._id = ico._id.toString();
       return ico;

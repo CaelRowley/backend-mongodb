@@ -14,3 +14,7 @@ export const allICOs = async () => axios.post(API_URL, {
     }
   `,
 });
+
+export default {
+  allICOs,
+};

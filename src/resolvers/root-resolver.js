@@ -8,5 +8,5 @@ const customScalarResolver = {
 
 export default [
   customScalarResolver,
-  icoResolvers
+  icoResolvers,
 ];

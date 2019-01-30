@@ -8,40 +8,19 @@ import resolvers from './resolvers/root-resolver';
 import models from './models/root-model';
 
 const app = express();
-
 app.use(cors());
 
 const server = new ApolloServer({
   introspection: true,
   typeDefs: schema,
   resolvers,
-  context: async ({ req }) => {
-    return {
-      models
-    }
-  },
+  context: async () => ({
+    models,
+  }),
 });
-
 server.applyMiddleware({ app, path: '/graphql' });
 
-// const schema = makeExecutableSchema({
-//   typeDefs,
-//   resolvers,
-// });
-
-// mongoose.connect('mongodb://localhost/test');
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 
-// const ICO = mongoose.model('ICO', { address: String, currency: String, value: Number, txid: String });
-
 const port = process.env.PORT || 8000;
-
-
-
-// app.use('/graphql', bodyParser.json(), graphqlExpress({ schema, context: { ICO } }));
-
-// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-
-app.listen({ port }, () =>
-  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
-);
+app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`));
