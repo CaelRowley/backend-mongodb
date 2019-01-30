@@ -2,17 +2,6 @@
 
 import { expect } from 'chai';
 import * as api from './api';
-import { connectDb } from '../src/models/root-model';
-
-let db;
-
-before(async () => {
-  db = await connectDb('mongodb://localhost:27017/mydatabasetest');
-});
-
-after(async () => {
-  await db.connection.close();
-});
 
 describe('ICO', () => {
   describe('allICOs()', () => {
