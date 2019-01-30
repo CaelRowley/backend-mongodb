@@ -13,9 +13,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "start": "forever -c 'nodemon --exitcrash --exec babel-node' src/app.js",
-    "serve": "node lib/src/app.js",
-    "test": "LOG_LEVEL_CONSOLE=error LOG_LEVEL_FILE=error npm-run-all build test:mocha",
-    "test:mocha": "find ./lib/tests/* -name '*_test.js' | xargs mocha --require @babel/polyfill --exit -R spec"
+    "serve": "babel-node lib/src/app.js",
+    "test": "npm-run-all build test:mocha",
+    "test:mocha": "mocha --require @babel/polyfill 'lib/tests/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "apollo-server-express": "^2.3.3",
     "app-root-path": "^2.1.0",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "graphql": "^14.1.1",
@@ -46,12 +47,15 @@
     "@babel/node": "^7.2.2",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.2.3",
+    "axios": "^0.18.0",
     "babel-plugin-inline-dotenv": "^1.2.0",
+    "chai": "^4.2.0",
     "dotenv": "^6.2.0",
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "forever": "^0.15.3",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.9",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.2"

@@ -1,17 +1,15 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-// import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
-
-import { makeExecutableSchema } from 'graphql-tools';
 import mongoose from 'mongoose';
-
 
 import schema from './schema/root-schema';
 import resolvers from './resolvers/root-resolver';
 import models from './models/root-model';
 
 const app = express();
+
+app.use(cors());
 
 const server = new ApolloServer({
   introspection: true,
