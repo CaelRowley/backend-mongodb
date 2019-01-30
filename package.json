@@ -14,8 +14,8 @@
     "lint:fix": "eslint --fix .",
     "start": "forever -c 'nodemon --exitcrash --exec babel-node' src/app.js",
     "serve": "babel-node lib/src/app.js",
-    "test": "npm-run-all build test:mocha",
-    "test:mocha": "mocha --require @babel/polyfill 'lib/tests/**/*.spec.js'"
+    "test": "LOG_LEVEL_CONSOLE=error LOG_LEVEL_FILE=error npm-run-all build test:mocha",
+    "test:mocha": "LOG_LEVEL_CONSOLE=error LOG_LEVEL_FILE=error mocha --require @babel/polyfill 'lib/tests/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "graphql-tools": "^4.0.4",
     "mongoose": "^5.4.8",
     "winston": "^3.1.0",
-    "winston-daily-rotate-file": "^3.5.1"
+    "winston-daily-rotate-file": "^3.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

@@ -1,3 +1,4 @@
+import logger from './config/winston';
 import express from 'express';
 import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
@@ -23,4 +24,4 @@ server.applyMiddleware({ app, path: '/graphql' });
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 
 const port = process.env.PORT || 8000;
-app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`));
+app.listen({ port }, () => logger.debug(`Server be jammin' on http://localhost:${port}${server.graphqlPath}`));
