@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CaelRowley/ipfs-platform-backend.git"
+    "url": "git+https://github.com/CaelRowley/backend-mongodb.git"
   },
   "author": "Cael Rowley",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CaelRowley/ipfs-platform-backend/issues"
+    "url": "https://github.com/CaelRowley/backend-mongodb/issues"
   },
-  "homepage": "https://github.com/CaelRowley/ipfs-platform-backend#readme",
+  "homepage": "https://github.com/CaelRowley/backend-mongodb#readme",
   "dependencies": {
     "apollo-server-express": "^2.3.3",
     "app-root-path": "^2.1.0",
@@ -47,7 +47,6 @@
     "axios": "^0.18.0",
     "babel-plugin-inline-dotenv": "^1.2.0",
     "chai": "^4.2.0",
-    "dotenv": "^6.2.0",
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",

@@ -1,8 +1,8 @@
-import logger from './config/winston';
 import express from 'express';
 import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import mongoose from 'mongoose';
+import logger from './config/winston';
 
 import schema from './schema/root-schema';
 import resolvers from './resolvers/root-resolver';
