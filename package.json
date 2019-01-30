@@ -30,13 +30,10 @@
   "dependencies": {
     "apollo-server-express": "^2.3.3",
     "app-root-path": "^2.1.0",
-    "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "fs": "0.0.1-security",
     "graphql": "^14.1.1",
     "graphql-iso-date": "^3.6.1",
-    "graphql-tools": "^4.0.4",
     "mongoose": "^5.4.8",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.6.0"
