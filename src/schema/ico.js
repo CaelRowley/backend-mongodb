@@ -5,12 +5,19 @@ export default gql`
     _id: String!
     address: String!
     currency: String!
-    value: Int!
+    value(text: Int): Int!
     txid: String!
   }
 
+  type Average {
+    value: Float!
+  }
+
   extend type Query {
-    allICOs: [ICO!]!
+    allICOs(cursor: Int, limit: Int): [ICO!]!
+    highestValue: [ICO!]!
+    mostTransactions: ICO
+    averageValue: Average!
   }
 
   extend type Mutation {
