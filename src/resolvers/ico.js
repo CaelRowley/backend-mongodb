@@ -3,6 +3,10 @@
 // const toCursorHash = string => Buffer.from(string).toString('base64');
 // const fromCursorHash = string => Buffer.from(string, 'base64').toString('ascii');
 
+const ETH_RATE = 92.66;
+const BTC_RATE = 2985.82;
+const LTC_RATE = 28.96;
+
 export default {
   // ICO: {
   //   value: async (parent, args, context) => {
@@ -93,6 +97,61 @@ export default {
       const average = await new models.Average({ value }).save();
       return average;
     },
+
+    totalCurrencyPercent: async (parent, args, { models, loaders }) => {
+      const icos = await models.ICO.find();
+      let total = 0;
+      let totalEthValue = 0;
+      let totalBtcValue = 0;
+      let totalLtcValue = 0;
+
+      let ethRate = await loaders.rate.load("ETH");
+      let btcRate = await loaders.rate.load("BTC");
+      let ltcRate = await loaders.rate.load("LTC");
+
+      icos.forEach(function (ico) {
+        const currency = ico.currency;
+        if (currency === "ETH") {
+          totalEthValue = totalEthValue + (ico.value * ethRate.toEuro)
+          total = total + (ico.value * ethRate.toEuro)
+        } else if (currency === "BTC") {
+          totalBtcValue = totalBtcValue + (ico.value * btcRate.toEuro)
+          total = total + (ico.value * btcRate.toEuro)
+        } else if (currency === "LTC") {
+          totalLtcValue = totalLtcValue + (ico.value * ltcRate.toEuro)
+          total = total + (ico.value * ltcRate.toEuro)
+        }
+      });
+
+      let ethPercent = 0;
+      let btcPercent = 0;
+      let ltcPercent = 0;
+
+      if (totalEthValue)
+        ethPercent = totalEthValue / total;
+      if (totalBtcValue)
+        btcPercent = totalBtcValue / total;
+      if (totalLtcValue)
+        ltcPercent = totalLtcValue / total;
+
+      return [
+        {
+          currency: "ETH",
+          totalValue: totalEthValue,
+          percent: ethPercent
+        },
+        {
+          currency: "BTC",
+          totalValue: totalBtcValue,
+          percent: btcPercent
+        },
+        {
+          currency: "LTC",
+          totalValue: totalLtcValue,
+          percent: ltcPercent
+        },
+      ]
+    }
   },
 
   Mutation: {
@@ -102,6 +161,23 @@ export default {
       const ico = await new models.ICO({ address, currency, value, txid }).save();
       ico._id = ico._id.toString();
       return ico;
+    },
+
+    createRate: async (parent, args, { models }) => {
+      return await new models.Rate(args).save();
+    },
+
+    deleteRate: async (parent, args, { models }) => {
+      const rates = await models.Rate.find();
+      const rate = rates.map(rateToFind => {
+        if (rateToFind.currency === args.currency)
+          return rateToFind
+      })
+      if (rate) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
