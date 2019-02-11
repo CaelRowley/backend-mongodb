@@ -28,7 +28,7 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app, path: '/graphql' });
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true });
 
 const port = process.env.PORT || 8000;
 app.listen({ port }, () => logger.debug(`Server be jammin' on http://localhost:${port}${server.graphqlPath}`));
